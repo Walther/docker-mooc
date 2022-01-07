@@ -381,10 +381,72 @@ The website is available at <localhost:8080>.
 
 ## 12. Hello, Frontend!
 
+```Dockerfile
+FROM node:14
+RUN npm install -g serve
+COPY . .
+RUN npm install
+ENV REACT_APP_BACKEND_URL "http://localhost:8080"
+RUN npm run build
+EXPOSE 5000
+CMD ["serve", "-s", "-l", "5000", "build"]
+```
+
+```
+# build
+docker build -t example-frontend .
+# run
+docker run --rm -it -p 4000:5000 example-frontend
+# query
+curl localhost:8080
+```
+
+Note: the port 4000 is used here because as of macOS Monterey, port 5000 is in use by the operating system by default. See [StackOverflow answer](https://stackoverflow.com/a/69957434).
+
 ## 13. Hello, Backend!
+
+```Dockerfile
+FROM golang:1.16
+
+WORKDIR /go/src/app
+COPY . .
+
+RUN go build
+ENV PORT 8080
+ENV REQUEST_ORIGIN "http://localhost:4000"
+EXPOSE 8080
+
+CMD ["./server"]
+```
+
+```
+# build
+docker build -t example-backend .
+# run
+docker run --rm -it -p 8080:8080 example-backend
+```
 
 ## 14. Environment
 
+Modifications added to the files above.
+
 ## 15. Homework
 
+- GitHub: <https://github.com/Walther/hello-dockermooc>
+- DockerHub: <https://hub.docker.com/r/anotherwalther/hello-dockermooc>
+
 ## 16. Heroku
+
+```
+# first, verify it works locally
+docker run --rm -it devopsdockeruh/heroku-example
+
+# tag and push
+docker tag devopsdockeruh/heroku-example registry.heroku.com/dockermooc/web  
+docker push registry.heroku.com/dockermooc/web
+
+# release
+heroku container:release web --app dockermooc
+```
+
+Application deployed at <https://dockermooc.herokuapp.com/>
