@@ -1,16 +1,6 @@
-# DevOps with Docker
+# Part 1
 
-These are my solutions for the course DevOps with Docker, available at <https://devopswithdocker.com/>.
-
-Sidenote: running these exercises on an ARM-based Mac with an M1 chip resulted in a bunch of warnings, as some of the images did not have native ARM builds available:
-
-> WARNING: The requested image's platform (linux/amd64) does not match the detected host platform (linux/arm64/v8) and no specific platform was requested
-
-However, this did not have any significant impact on solving these exercises.
-
-## Part 1
-
-### 1. Getting started
+## 1. Getting started
 
 Starting three detached containers
 
@@ -51,7 +41,7 @@ CONTAINER ID   IMAGE          COMMAND                  CREATED              STAT
 d2aaa32e5610   nginx:latest   "/docker-entrypoint.…"   2 minutes ago        Exited (0) 3 seconds ago             objective_bell
 ```
 
-### 2. Cleanup
+## 2. Cleanup
 
 Stop the remaining container
 
@@ -76,7 +66,7 @@ docker ps -a
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 ```
 
-### 3. Secret message
+## 3. Secret message
 
 Start the mystery container
 
@@ -105,7 +95,7 @@ Secret message is: 'You can find the source code here: https://github.com/docker
 2021-11-22 11:26:20 +0000 UTC
 ```
 
-### 4. Missing dependencies
+## 4. Missing dependencies
 
 Initial state:
 
@@ -151,7 +141,7 @@ The following additional packages will be installed:
   ca-certificates krb5-locales libasn1-8-heimdal libbrotli1 libcurl4 libgssapi-krb5-2 libgssapi3-heimdal libhcrypto4-heimdal libheimbase1-heimdal libheimntlm0-heimdal libhx509-5-heimdal
   libk5crypto3 libkeyutils1 libkrb5-26-heimdal libkrb5-3 libkrb5support0 libldap-2.4-2 libldap-com
 
-# SNIP lots of logs here
+ SNIP lots of logs here
 
 Setting up curl (7.68.0-1ubuntu2.7) ...
 Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
@@ -188,7 +178,7 @@ Searching..
 </body></html>
 ```
 
-### 5. Size of images
+## 5. Size of images
 
 Start both containers
 
@@ -235,7 +225,7 @@ devopsdockeruh/simple-web-service   ubuntu    4e3362e907d5   8 months ago   83MB
 devopsdockeruh/simple-web-service   alpine    fd312adc88e0   8 months ago   15.7MB
 ```
 
-### 6. Hello Docker Hub
+## 6. Hello Docker Hub
 
 Run the command to start the mystery container
 
@@ -266,7 +256,7 @@ Give me the password: hunter2
 hunter2 is not the correct password, please try again
 ```
 
-### 7. Two line Dockerfile
+## 7. Two line Dockerfile
 
 Create a simple Dockerfile
 
@@ -295,12 +285,12 @@ docker run web-server
 [GIN-debug] Listening and serving HTTP on :8080
 ```
 
-### 8. Image for script
+## 8. Image for script
 
 Save a small script into a file `curl.sh`, and remember to run `chmod +x curl.sh`
 
 ```sh
-#/bin/sh
+/bin/sh
 echo "Input website:"; read website; echo "Searching.."; sleep 1; curl http://$website;
 ```
 
@@ -333,7 +323,7 @@ Searching..
 </body></html>
 ```
 
-### 9. Volumes
+## 9. Volumes
 
 Create a local file and use a bind mount.
 
@@ -342,7 +332,7 @@ touch text.log;
 docker run --rm -it --mount type=bind,source=$(pwd)/text.log,target=/usr/src/app/text.log devopsdockeruh/simple-web-service
 ```
 
-### 10. Ports open
+## 10. Ports open
 
 Run an ephemeral container with a port forward
 
@@ -361,7 +351,7 @@ docker run --rm -it -p 8080:8080 devopsdockeruh/simple-web-service server
 ^C%
 ```
 
-### 11. Spring
+## 11. Spring
 
 Clone the repo from 
 
@@ -389,16 +379,12 @@ docker run --rm -it -p 8080:8080 spring-example-project
 
 The website is available at <localhost:8080>.
 
-### 12. Hello, Frontend!
+## 12. Hello, Frontend!
 
-### 13. Hello, Backend!
+## 13. Hello, Backend!
 
-### 14. Environment
+## 14. Environment
 
-### 15. Homework
+## 15. Homework
 
-### 16. Heroku
-
-## Part 2
-
-## Part 3
+## 16. Heroku
